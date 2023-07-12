@@ -24,15 +24,15 @@
         ];
       in {
         packages.default = nrsk.buildPackage {
-          CPATH = "${pkgs.libclang}/include";
-          LIBCLANG_PATH = "${pkgs.libclang}/lib";
+          # CPATH = "${pkgs.libclang.lib}/include";
+          LIBCLANG_PATH = "${pkgs.libclang.lib}/lib";
           RUST_BACKTRACE = "full";
-          buildInputs = with pkgs; [ libclang ] ++ tauri-deps;
+          buildInputs =  with pkgs; [ libclang nodejs_20 ] ++ tauri-deps;
           src = ./.;
         };
         apps.default = {
           type = "app";
-          program = "${self.packages.${system}.default}/GameController.jar.sh";
+          program = "${self.packages.${system}.default}/gamecontroller3";
         };
       });
 }
